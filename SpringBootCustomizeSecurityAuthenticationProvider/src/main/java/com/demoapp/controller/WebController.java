@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.demoapp.security.MyUserDetails;
+
 @Controller
 public class WebController {
 	
@@ -16,8 +18,8 @@ public class WebController {
 	
 	@RequestMapping(value={"/welcome"})
 	public String welcome(){
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println(principal);
+		MyUserDetails principal = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println(principal.getAuthorities().toString());
 		return "welcome";
 	}
 
